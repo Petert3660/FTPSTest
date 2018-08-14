@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/FTPSTest.iml" filepath="$PROJECT_DIR$/.idea/modules/FTPSTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/FTPSTest_main.iml" filepath="$PROJECT_DIR$/.idea/modules/FTPSTest_main.iml" group="FTPSTest" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/FTPSTest_test.iml" filepath="$PROJECT_DIR$/.idea/modules/FTPSTest_test.iml" group="FTPSTest" />
+    </modules>
+  </component>
+</project>
