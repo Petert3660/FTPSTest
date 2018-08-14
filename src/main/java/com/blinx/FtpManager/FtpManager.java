@@ -47,7 +47,7 @@ public class FtpManager extends Thread {
                     for (FTPFile file : files) {
                         in = ftpsClient.retrieveFileStream(file.getName());
                         CSVReader csvReader = new CSVReader(new InputStreamReader(in));
-                        saveToDatabase((List<String>) csvReader.readAll());
+                        saveToDatabase(csvReader.readAll());
                         ftpsClient.storeFile(targetDirectory, in);
                         ftpsClient.deleteFile(directory + "/" + file.getName());
                         updateLogFile(directory + "/" + file.getName());
@@ -67,7 +67,7 @@ public class FtpManager extends Thread {
         }
     }
 
-    private void saveToDatabase(List<String> input) {
+    private void saveToDatabase(List<String[]> input) {
         // Save input from file to new database table
     }
 
