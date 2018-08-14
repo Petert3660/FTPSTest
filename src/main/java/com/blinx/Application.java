@@ -14,7 +14,11 @@ public class Application {
         for (Server server : listOfServers) {
 
             FtpManager ftpManager = new FtpManager(server.getHostName(), server.getFtpUserId(), server.getFtpPassword(), server.getDirectories());
-            ftpManager.start();
+            try {
+                ftpManager.start();
+            } catch (RuntimeException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

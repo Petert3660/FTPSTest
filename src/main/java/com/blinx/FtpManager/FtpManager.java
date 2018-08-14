@@ -1,46 +1,40 @@
 package com.blinx.FtpManager;
 
+import com.blinx.datamodels.Server;
 import com.opencsv.CSVReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPSClient;
 
 public class FtpManager extends Thread {
 
-    private String ftpHost;
-    private String ftpUser;
-    private String ftpPassword;
-    private ArrayList<String> directories;
+    Server server;
 
     private final String targetDirectory = "name of target directory";
 
-    public FtpManager(String ftpHost, String ftpUser, String ftpPassword, ArrayList<String> directories) {
-        this.ftpHost = ftpHost;
-        this.ftpUser = ftpUser;
-        this.ftpPassword = ftpPassword;
-        this.directories = directories;
+    public FtpManager(Server server) {
+        this.server = server;
     }
 
     @Override
-    public void run() {
+    public void run() throws RuntimeException {
 
         InputStream in = null;
 
         try {
             FTPSClient ftpsClient = new FTPSClient();
             try {
-                ftpsClient.connect(ftpHost, 21);
-                if (!ftpsClient.login(ftpUser, ftpPassword)) {
+                ftpsClient.connect(server.getHostName(), 21);
+                if (!ftpsClient.login(server.getFtpUserId(), server.getFtpPassword())) {
                     throw new RuntimeException(ftpsClient.getReplyString());
                 }
                 if (!ftpsClient.changeWorkingDirectory("in")) {
                     throw new RuntimeException(ftpsClient.getReplyString());
                 }
-                
-                for (String directory : directories) {
+
+                for (String directory : server.getDirectories()) {
                     FTPFile[] files = ftpsClient.listFiles(directory);
                     for (FTPFile file : files) {
                         in = ftpsClient.retrieveFileStream(file.getName());
