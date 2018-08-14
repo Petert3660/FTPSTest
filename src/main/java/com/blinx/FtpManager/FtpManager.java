@@ -39,9 +39,7 @@ public class FtpManager extends Thread {
                 if (!ftpsClient.changeWorkingDirectory("in")) {
                     throw new RuntimeException(ftpsClient.getReplyString());
                 }
-
-
-
+                
                 for (String directory : directories) {
                     FTPFile[] files = ftpsClient.listFiles(directory);
                     for (FTPFile file : files) {
